@@ -30,6 +30,12 @@ class _CategoriesScreenState extends State<CategoriesScreen>
     _animationController.forward();
   }
 
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
   void _selectCategory(BuildContext context, Category category) {
     final filteredMeals = widget.availableMeals
         .where((meal) => meal.categories.contains(category.id))
@@ -66,10 +72,26 @@ class _CategoriesScreenState extends State<CategoriesScreen>
             )
         ],
       ),
-      builder: (context, child) => Padding(
-        padding: EdgeInsets.only(top: 100 - _animationController.value * 100),
+      builder: (context, child) => SlideTransition(
+        position: Tween(begin: Offset(0, 0.3), end: Offset(0, 0)).animate(
+            CurvedAnimation(
+                parent: _animationController, curve: Curves.easeInOut)),
+
+        //  Method 2:
+        // _animationController.drive(
+        //   Tween(
+        //     begin: Offset(0, 0.3),
+        //     end: Offset(0,0) //ends on actual positon of grid view
+        //   )
+        // )
         child: child,
       ),
+
+      //Method 3
+      // Padding(
+      //   padding: EdgeInsets.only(top: 100 - _animationController.value * 100),
+      //   child: child,
+      // ),
     );
   }
 }

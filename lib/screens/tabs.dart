@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meals/providers/favorites_provider.dart';
 import 'package:meals/providers/filters_provider.dart';
-import 'package:meals/providers/meals_provider.dart';
 import 'package:meals/screens/categories.dart';
 import 'package:meals/screens/filters.dart';
 import 'package:meals/screens/meals.dart';
@@ -38,7 +37,7 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
     if (identifier == 'filters') {
       Navigator.of(context).pop();
       await Navigator.of(context).push<Map<Filter, bool>>(
-        MaterialPageRoute(builder: (ctx) => FiltersScreen()),
+        MaterialPageRoute(builder: (ctx) => const FiltersScreen()),
       );
     }
   }
@@ -72,13 +71,11 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
           BottomNavigationBarItem(
               icon: Icon(
                 Icons.set_meal,
-                color: Colors.black,
               ),
               label: 'Categories'),
           BottomNavigationBarItem(
               icon: Icon(
                 Icons.star,
-                color: Colors.black,
               ),
               label: 'Favorites'),
         ],

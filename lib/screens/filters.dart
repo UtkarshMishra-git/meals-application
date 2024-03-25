@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meals/providers/filters_provider.dart';
+import 'package:meals/screens/tabs.dart';
 
 class FiltersScreen extends ConsumerWidget {
   const FiltersScreen({
@@ -12,7 +13,7 @@ class FiltersScreen extends ConsumerWidget {
     final activeFilters = ref.watch(filtersProvider);
     return Scaffold(
       appBar: AppBar(
-        // leading: BackButton(),
+        // leading: BackButton(onPressed: () => Navigator.of(context).pop()),
         title: const Text('Your Filters'),
       ),
       body: Column(

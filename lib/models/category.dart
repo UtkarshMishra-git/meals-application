@@ -4,7 +4,7 @@ class Category {
   const Category({
     required this.id,
     required this.title,
-    this.color = Colors.amber,
+    this.color = Colors.orange,
   });
 
   final String id;
