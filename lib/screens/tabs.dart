@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:meals/providers/favorites_provider.dart';
-import 'package:meals/providers/filters_provider.dart';
+
 import 'package:meals/screens/categories.dart';
 import 'package:meals/screens/filters.dart';
 import 'package:meals/screens/meals.dart';
 import 'package:meals/widgets/main_drawer.dart';
+import 'package:meals/providers/favorites_provider.dart';
+import 'package:meals/providers/filters_provider.dart';
 
 const kInitialFilters = {
   Filter.glutenFree: false,
   Filter.lactoseFree: false,
   Filter.vegetarian: false,
-  Filter.vegan: false,
+  Filter.vegan: false
 };
 
 class TabsScreen extends ConsumerStatefulWidget {
@@ -35,9 +36,10 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
   void _setScreen(String identifier) async {
     Navigator.of(context).pop();
     if (identifier == 'filters') {
-      Navigator.of(context).pop();
       await Navigator.of(context).push<Map<Filter, bool>>(
-        MaterialPageRoute(builder: (ctx) => const FiltersScreen()),
+        MaterialPageRoute(
+          builder: (ctx) => const FiltersScreen(),
+        ),
       );
     }
   }
@@ -45,10 +47,12 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
   @override
   Widget build(BuildContext context) {
     final availableMeals = ref.watch(filteredMealsProvider);
+
     Widget activePage = CategoriesScreen(
       availableMeals: availableMeals,
     );
     var activePageTitle = 'Categories';
+
     if (_selectedPageIndex == 1) {
       final favoriteMeals = ref.watch(favoriteMealsProvider);
       activePage = MealsScreen(
@@ -67,17 +71,16 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
       body: activePage,
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectPage,
-        items: [
+        currentIndex: _selectedPageIndex,
+        items: const [
           BottomNavigationBarItem(
-              icon: Icon(
-                Icons.set_meal,
-              ),
-              label: 'Categories'),
+            icon: Icon(Icons.set_meal),
+            label: 'Categories',
+          ),
           BottomNavigationBarItem(
-              icon: Icon(
-                Icons.star,
-              ),
-              label: 'Favorites'),
+            icon: Icon(Icons.star),
+            label: 'Favorites',
+          ),
         ],
       ),
     );

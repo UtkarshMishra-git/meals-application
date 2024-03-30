@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+// import 'package:meals/screens/tabs.dart';
+// import 'package:meals/widgets/main_drawer.dart';
 import 'package:meals/providers/filters_provider.dart';
-import 'package:meals/screens/tabs.dart';
 
 class FiltersScreen extends ConsumerWidget {
-  const FiltersScreen({
-    super.key,
-  });
+  const FiltersScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final activeFilters = ref.watch(filtersProvider);
+
     return Scaffold(
       appBar: AppBar(
-        // leading: BackButton(onPressed: () => Navigator.of(context).pop()),
         title: const Text('Your Filters'),
       ),
       body: Column(
@@ -105,7 +105,7 @@ class FiltersScreen extends ConsumerWidget {
             ),
             activeColor: Theme.of(context).colorScheme.tertiary,
             contentPadding: const EdgeInsets.only(left: 34, right: 22),
-          )
+          ),
         ],
       ),
     );
